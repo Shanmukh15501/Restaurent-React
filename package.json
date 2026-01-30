@@ -1,11 +1,13 @@
 {
   "dependencies": {
-    "parcel": "^2.16.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build src/index.js"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.3"
   }
 }
