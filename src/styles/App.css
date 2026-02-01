@@ -59,3 +59,21 @@ ul li a:hover {
   height: 168px;
 
 }
+
+.btn-class
+{
+  display: flex;
+  padding: 5px;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+
+.search-bar {
+  padding: 5px;
+  
+}
+
+.btn-class {
+  padding: 5px;
+
+}
