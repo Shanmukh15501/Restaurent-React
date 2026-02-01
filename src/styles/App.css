@@ -24,3 +24,38 @@ ul li a {
 ul li a:hover {
   background-color: #111111;
 }
+
+
+.restaurant-class {
+
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.top-rated-button {
+  margin-top: 10px;
+}
+.res-card {
+  border: 2px solid black;
+  text-align: center;
+  margin-top: 10px;
+  margin-right: 10px;
+
+}
+
+
+.shimmer-ui{
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.dummy-card {
+  margin-top: 10px;
+  margin-right: 10px;
+  background-color: gray;
+  width: 300px;
+  height: 168px;
+
+}
