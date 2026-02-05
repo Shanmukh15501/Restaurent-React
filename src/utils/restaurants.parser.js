@@ -3,6 +3,17 @@ export function extractRestaurants(json) {
   try {
     if (!json) return [];
 
+    if (json.status !== true) {
+      return {
+        error: json.message || "Failed to fetch restaurant menu",
+      };
+    }
+    
+    const data = json.data;
+    if (!data || typeof data !== "object") {
+      return { error: "Missing data in API response" };
+    }
+
     var cards = json?.data?.data?.cards || [];
     if (!Array.isArray(cards)) return [];
 

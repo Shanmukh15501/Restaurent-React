@@ -1,7 +1,6 @@
-import RContainer from "./Restaurant_container";
+import RContainer from '../restaurants/RestaurantContainer.js';
 
 const Body = () => {
-
   return (
     <div className="body-class">
       <RContainer />

@@ -6,7 +6,7 @@
     height: 100px;
     background-color: #333333;
 }
-ul { 
+.nav-header { 
   display: flex;
   list-style-type: none;
   gap: 25px;

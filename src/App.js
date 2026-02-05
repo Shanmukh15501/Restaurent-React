@@ -1,13 +1,12 @@
-import "./styles/App.css";
-import Header from "./components/Header.js";
-import Body from "./components/Body.js";
-import "./styles/App.css";
+import './styles/App.css';
+import Header from './components/common/Header.js';
+import { Outlet } from 'react-router';
 
 function App() {
   return (
     <div className="app">
       <Header />
-      <Body />
+      <Outlet />
     </div>
   );
 }
