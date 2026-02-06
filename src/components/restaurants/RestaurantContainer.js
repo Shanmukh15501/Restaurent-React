@@ -4,13 +4,15 @@ import { useRestaurants } from '../../hooks/useRestaurants.js';
 import ShimmerUI from '../common/ShimmerUI.js';
 
 const RContainer = () => {
-  const restaurantsState = useRestaurants();
+  const restaurantState = useRestaurants();
   const {
     allRestaurants,
     filteredRestaurants,
     setFilteredRestaurants,
     loading,
-  } = restaurantsState;
+    error,
+  } = restaurantState;
+
   const [searchText, setSearchText] = useState('');
 
   // ⭐ Top Rated filter
@@ -36,6 +38,25 @@ const RContainer = () => {
   // ⏳ Show shimmer only while loading
   if (loading) {
     return <ShimmerUI />;
+  }
+
+  // ❌ Show error if API fails
+  if (error) {
+    return (
+      <div
+        style={{
+          padding: '20px',
+          margin: '20px',
+          backgroundColor: '#f8d7da',
+          border: '1px solid #f5c6cb',
+          color: '#721c24',
+          borderRadius: '4px',
+        }}
+      >
+        <h3>Error Loading Restaurants</h3>
+        <p>{error}</p>
+      </div>
+    );
   }
 
   return (

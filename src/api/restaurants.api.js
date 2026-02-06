@@ -15,7 +15,6 @@ export async function getRestaurants(url) {
     return extractRestaurants(json);
 
   } catch (error) {
-    console.error("API request failed:", error);
     throw error;
   }
 }
@@ -33,7 +32,6 @@ export async function getRestaurantMenu(url) {
     return extractRestaurantMenu(json);
 
   } catch (error) {
-    console.error("API request failed:", error);
     throw error;
   }
 }

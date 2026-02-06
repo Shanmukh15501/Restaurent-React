@@ -1,32 +1,45 @@
 import { useState, useEffect } from 'react';
 import { getRestaurantMenu } from '../api/restaurants.api.js';
-import { VITE_API_BASE_URL } from "../utils/Constants.js";
-
+import { VITE_API_BASE_URL } from '../utils/Constants.js';
 
 export const useRestaurantMenu = (restaurantId) => {
+  // 🔹 State
   const [restaurantInfo, setRestaurantInfo] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  // 🔹 Trigger fetch when restaurantId changes
+  useEffect(function fetchMenuEffect() {
+    async function fetchMenuData() {
+      // Clear previous state
+      setError(null);
+      setLoading(true);
+
       try {
-        const data = await getRestaurantMenu(
-          `${VITE_API_BASE_URL}/listRestaurantMenu/${restaurantId}`
-        );
+        // Build API URL and fetch
+        const menuUrl = `${VITE_API_BASE_URL}/listRestaurantMenu/${restaurantId}`;
+        const data = await getRestaurantMenu(menuUrl);
+
+        // Update state with fetched data
         setRestaurantInfo(data?.restaurantInfo || null);
         setMenuItems(data?.itemCategories || []);
       } catch (err) {
-        console.error('Error loading restaurant-menu data', err);
+        // Handle errors gracefully
+        const errorMsg =
+          err?.message || 'Failed to load restaurant menu. Please try again.';
+        setError(errorMsg);
       } finally {
-                setLoading(false);
+        // Always stop loading
+        setLoading(false);
       }
-    };
+    }
 
     if (restaurantId) {
-      fetchData();
+      fetchMenuData();
     }
   }, [restaurantId]);
 
-  return { restaurantInfo, menuItems, loading };
+  // 🔹 Return hook state
+  return { restaurantInfo, menuItems, loading, error };
 };

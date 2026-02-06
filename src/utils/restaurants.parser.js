@@ -1,24 +1,28 @@
 // src/utils/restaurants.parser.js
 export function extractRestaurants(json) {
   try {
-    if (!json) return [];
+    if (!json) {
+      throw new Error('API response is empty');
+    }
 
     if (json.status !== true) {
-      return {
-        error: json.message || "Failed to fetch restaurant menu",
-      };
+      throw new Error(
+        json.message || 'Failed to fetch restaurants'
+      );
     }
-    
+
     const data = json.data;
-    if (!data || typeof data !== "object") {
-      return { error: "Missing data in API response" };
+    if (!data || typeof data !== 'object') {
+      throw new Error('Missing data in API response');
     }
 
-    var cards = json?.data?.data?.cards || [];
-    if (!Array.isArray(cards)) return [];
+    const cards = json?.data?.data?.cards || [];
+    if (!Array.isArray(cards)) {
+      throw new Error('Invalid cards format in API response');
+    }
 
-    for (var i = 0; i < cards.length; i++) {
-      var restaurants =
+    for (let i = 0; i < cards.length; i++) {
+      const restaurants =
         cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
       if (Array.isArray(restaurants)) {
@@ -26,9 +30,8 @@ export function extractRestaurants(json) {
       }
     }
 
-    return [];
+    throw new Error('No restaurants found in API response');
   } catch (error) {
-    console.error("extractRestaurants failed:", error);
-    return [];
+    throw error;
   }
 }
