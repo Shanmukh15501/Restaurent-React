@@ -1,4 +1,4 @@
-import RContainer from '../restaurants/RestaurantContainer.js';
+import RContainer from '../restaurants/RContainer.js';
 
 const Body = () => {
 

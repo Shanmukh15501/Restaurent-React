@@ -1,6 +1,7 @@
-import { useParams } from 'react-router';
-import { useRestaurantMenu } from '../../hooks/useRestaurantMenu.js';
-import ShimmerUI from '../common/ShimmerUI.js';
+import { useParams } from "react-router";
+import { useRestaurantMenu } from "../../hooks/useRestaurantMenu.js";
+import ShimmerUI from "../common/ShimmerUI.js";
+import RestaurantItemCategories from "./RCategories.js";
 
 const RMenu = () => {
   const { rid } = useParams();
@@ -16,12 +17,12 @@ const RMenu = () => {
     return (
       <div
         style={{
-          padding: '20px',
-          margin: '20px',
-          backgroundColor: '#f8d7da',
-          border: '1px solid #f5c6cb',
-          color: '#721c24',
-          borderRadius: '4px',
+          padding: "20px",
+          margin: "20px",
+          backgroundColor: "#f8d7da",
+          border: "1px solid #f5c6cb",
+          color: "#721c24",
+          borderRadius: "4px",
         }}
       >
         <h3>Error Loading Menu</h3>
@@ -34,12 +35,12 @@ const RMenu = () => {
     return (
       <div
         style={{
-          padding: '20px',
-          margin: '20px',
-          backgroundColor: '#fff3cd',
-          border: '1px solid #ffeeba',
-          color: '#856404',
-          borderRadius: '4px',
+          padding: "20px",
+          margin: "20px",
+          backgroundColor: "#fff3cd",
+          border: "1px solid #ffeeba",
+          color: "#856404",
+          borderRadius: "4px",
         }}
       >
         <h3>Restaurant not found</h3>
@@ -49,20 +50,16 @@ const RMenu = () => {
   }
 
   return (
-    <div className="RMenu-class">
-      <h2>Name - {restaurantInfo.name}</h2>
-      <h2>Locality - {restaurantInfo.locality}</h2>
-      <hr />
-
+    <div className="m-2 p-2 text-center">
+      <h2 className="font-bold my-1">Name - {restaurantInfo.name}</h2>
+      <h2 className="font-bold my-1">Locality - {restaurantInfo.locality}</h2>
       {menuItems.map((menu, index) => (
         <div key={menu?.title || index}>
-          <h2>Category - {menu.title}</h2>
-          <hr />
-          {menu?.itemCards?.map((item) => (
-            <p key={item?.card?.info?.id}>
-              {item?.card?.info?.name} - {item?.card?.info?.price / 100}
-            </p>
-          ))}
+          <RestaurantItemCategories
+            id={index}
+            category={menu.title}
+            items={menu.itemCards}
+          ></RestaurantItemCategories>
         </div>
       ))}
     </div>

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useRestaurants } from "../../hooks/useRestaurants";
 import ShimmerUI from "../common/ShimmerUI";
-import RCard, { ResVegCard } from "./RestaurantCard";
+import RCard, { ResVegCard } from "./RCard";
 
 // ✅ Wrap the card ONCE (HOC usage)
-const VegRCard = ResVegCard(RCard);
 
 const RContainer = () => {
+
+   const VegRCard = ResVegCard(RCard);
+
   const {
     allRestaurants,
     filteredRestaurants,
