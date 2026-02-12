@@ -2,17 +2,20 @@ import { useParams } from "react-router";
 import { useRestaurantMenu } from "../../hooks/useRestaurantMenu.js";
 import ShimmerUI from "../common/ShimmerUI.js";
 import RestaurantItemCategories from "./RCategories.js";
+import { useState } from "react";
 
 const RMenu = () => {
   const { rid } = useParams();
   const menuState = useRestaurantMenu(rid);
   const { restaurantInfo, menuItems, loading, error } = menuState;
 
+  // 🔥 This holds which accordion is open
+  const [openCategoryIndex, setOpenCategoryIndex] = useState(null);
+
   if (loading) {
     return <ShimmerUI />;
   }
 
-  // ❌ Show error if API fails
   if (error) {
     return (
       <div
@@ -53,14 +56,16 @@ const RMenu = () => {
     <div className="m-2 p-2 text-center">
       <h2 className="font-bold my-1">Name - {restaurantInfo.name}</h2>
       <h2 className="font-bold my-1">Locality - {restaurantInfo.locality}</h2>
+
       {menuItems.map((menu, index) => (
-        <div key={menu?.title || index}>
-          <RestaurantItemCategories
-            id={index}
-            category={menu.title}
-            items={menu.itemCards}
-          ></RestaurantItemCategories>
-        </div>
+        <RestaurantItemCategories
+          key={menu?.title || index}
+          index={index}
+          category={menu.title}
+          items={menu.itemCards}
+          isOpen={openCategoryIndex === index}
+          setOpenCategoryIndex={setOpenCategoryIndex}
+        />
       ))}
     </div>
   );

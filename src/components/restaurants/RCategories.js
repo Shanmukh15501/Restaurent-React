@@ -1,21 +1,34 @@
-import { useState } from "react";
 import RCItems from "./RCategoryItemsList";
-const RestaurantItemCategories = ({ id, category, items }) => {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleAccordion = () => {
-    setIsOpen(!isOpen);
-  };
+const RestaurantItemCategories = ({
+  index,
+  category,
+  items,
+  isOpen,
+  setOpenCategoryIndex,
+}) => {
+
+  function toggleAccordion() {
+    if (isOpen) {
+      setOpenCategoryIndex(null);
+    } else {
+      setOpenCategoryIndex(index);
+    }
+  }
 
   return (
     <>
-      <div className="flex justify-between w-6/12 mx-auto my-4 bg-gray-50 shadow-lg p-4">
+      <div
+        onClick={toggleAccordion}
+        className="flex justify-between w-4/12 mx-auto my-4 bg-gray-50 shadow-lg p-4 cursor-pointer hover:bg-gray-100 transition"
+      >
         <span className="font-bold text-lg">
-          {category}({items.length})
+          {category} ({items?.length ?? 0})
         </span>
-        <span>▼</span>
+        <span>{isOpen ? "▲" : "▼"}</span>
       </div>
-      <RCItems items={items}></RCItems>
+
+      {isOpen && <RCItems items={items} />}
     </>
   );
 };
