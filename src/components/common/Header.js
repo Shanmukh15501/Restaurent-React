@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { LOGO } from '../../utils/Constants';
 import { NavLink } from 'react-router';
 import { useInternet } from '../../hooks/useInternet';
+import UserContext from './UserContext';
+
+
 const Header = () => {
   const [btn, setBtn] = useState('Login');
   const onlineStatus =  useInternet()
+  const {loggedInUser} = useContext(UserContext);
 
   return (
     <nav className="flex justify-between bg-pink-100 shadow-lg m-2 p-5">
@@ -15,7 +19,7 @@ const Header = () => {
 
       <ul className="flex p-4 m-4">
         <li className='px-4'>
-            <NavLink>Online Status{onlineStatus? "✅":"❌"}</NavLink>
+            <NavLink>{loggedInUser} Online Status {onlineStatus? "✅":"❌"}</NavLink>
         </li>
         <li className='px-4'>
           <NavLink to="/">Home</NavLink>
