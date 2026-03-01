@@ -4,6 +4,8 @@ import { Outlet } from 'react-router';
 import Offline from './components/common/Offline.js';
 import { useInternet } from './hooks/useInternet.js';
 import UserContext from "./components/common/UserContext.js"; // no .js needed
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore.js';
 
 function App() {
   const { active } = useInternet();
@@ -13,14 +15,15 @@ function App() {
   }
 
   return (
+    <Provider store={appStore}>
     <div className="app">
-
-    <UserContext.Provider value={{ loggedInUser: "Aparna" }}>
+    <UserContext.Provider value={{ loggedInUser: "Shanmukh" }}>
       <Header />
       <Outlet />
     </UserContext.Provider>
     
     </div>
+    </Provider>
   );
 }
 

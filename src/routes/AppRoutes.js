@@ -9,6 +9,8 @@ import News from "../components/pages/News.js";
 import Error from "../components/pages/Error.js";
 import ShimmerUI from "../components/common/ShimmerUI.js";
 import RMenu from "../components/restaurants/RestaurantMenu.js";
+import Cart from "../components/pages/Cart.js";
+
 
 const Grocery = lazy(function () {
   return import("../components/pages/Grocery.js");
@@ -32,6 +34,9 @@ export const appRoutes = (
       <Route path="news" element={<News />} />
       <Route path="contact" element={<Contact />} />
       <Route path="restaurants/:rid" element={<RMenu />} />
+      <Route path="/cart" element={<Cart />} />
+
+
     </Route>
 
     <Route path="*" element={<Error />} />

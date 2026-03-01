@@ -3,12 +3,15 @@ import { LOGO } from '../../utils/Constants';
 import { NavLink } from 'react-router';
 import { useInternet } from '../../hooks/useInternet';
 import UserContext from './UserContext';
-
+import { useSelector } from 'react-redux'
 
 const Header = () => {
   const [btn, setBtn] = useState('Login');
   const onlineStatus =  useInternet()
   const {loggedInUser} = useContext(UserContext);
+  const cartItems = useSelector(function(store) {
+        return store.cart.items;
+    });
 
   return (
     <nav className="flex justify-between bg-pink-100 shadow-lg m-2 p-5">
@@ -30,6 +33,9 @@ const Header = () => {
         <li className='px-4'>
           <NavLink to="/news">News</NavLink>
         </li>
+          <li className='px-4 bold'>
+            <NavLink to="/cart"> Cart-({cartItems.length} Items)</NavLink>
+          </li>
         <li className='px-4'>
           <NavLink to="/contact">Contact</NavLink>
         </li>
